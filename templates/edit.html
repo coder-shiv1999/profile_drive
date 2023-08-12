@@ -12,6 +12,11 @@
         
     <title>Link Tree</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        .form-input{
+            color:gray;
+        }
+    </style>
 </head>
 
 <body>
@@ -68,6 +73,10 @@
         <div class="mainbox">
             <div class="innerbox">
                 <div class="titlebox">
+                    <div class="contentbox">
+                        {% comment %} <a href="{% url 'create' %}" class="btn">Create your profile</a> {% endcomment %}
+                        <p style="font-size:25px;">Update Your fields...</p>
+                        </div>
                     <div class="title">
                         <div class="cardbox" style="
                         width: 100%; display: none;
