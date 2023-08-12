@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/4bf48f78b4.js" crossorigin="anonymous"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        
+    <title>Link Tree</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light " style="
+    background-color: #bacee0;
+"> 
+        <a class="navbar-brand" href="#">Link Tree</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'create' %}">Create</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'priview' %}">Preview</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'edit' %}">Edit</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                </li>               
+            </ul>
+        </div>
+      </nav>
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          <strong>Alert !</strong> {{message}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      {% endfor %}
+
+      <form method="POST">
+        {% csrf_token %}
+        {% for emp in emps %}
+        <div class="mainbox">
+            <div class="innerbox">
+                <div class="titlebox">
+                    <div class="title">
+                        <div class="cardbox" style="
+                        width: 100%; display: none;
+                    ">
+                            <div class="form-group">Email:
+                            <input type="text" class="form-input" name="uemail" id="name" placeholder="first name" value={{user.get_username}}
+                                />
+                        </div>
+                        </div>
+                        <div class="cardbox" style="
+                        width: 100%;
+                    ">
+                            <div class="form-group">Name:
+                            <input  type="text" class="form-input" name="usname" id="name" placeholder="Name" value="{{emp.usname}}"
+                                />
+                        </div>
+                        </div>
+                        <div class="cardbox" style="
+                        width: 100%;
+                    ">
+                            <div class="form-group">Designation:
+                            <input type="text" class="form-input" name="desg" id="name" placeholder="Designation" value="{{emp.desg}}"
+                                />
+                        </div>
+                        </div>
+                        
+                    </div>
+                </div>
+    
+                <div class="contentbox">
+                    <div class="cardbox">
+                        <div class="form-group">
+                            Portfolio:
+                            <input type="text" class="form-input" name="port" id="name" placeholder="Portfolio" value="{{emp.port}}"
+                                />
+                        </div>
+    
+                    </div>
+                    <div class="cardbox">
+                        Resume:
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="res" id="name" placeholder="Resume" value="{{emp.res}}"
+                                />
+                        </div>
+    
+                    </div>
+                    <div class="cardbox">
+                        Website:
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="web" id="name" placeholder="Website" value="{{emp.web}}"
+                                />
+                        </div>
+                    </div>
+                </div>
+    
+                <h2>
+                    <p style="text-align: center;">Social media</p>
+                </h2>
+                <div class="contentbox">
+                    <div class="cardbox">
+                        LinkedIn:
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="linked" id="linked" placeholder="LinkedIn" value="{{emp.linked}}"
+                                />
+                        </div>
+    
+                    </div>
+                    <div class="cardbox">
+                        Instagram:
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="insta" id="name" placeholder="Instagram" value="{{emp.insta}}"
+                                />
+                        </div>
+    
+                    </div>
+                    <div class="cardbox">
+                        
+                        Facebook:
+                            <div class="form-group">
+                                <input type="text" class="form-input" name="fb" id="name" placeholder="Facebook" value="{{emp.fb}}"
+                                    />
+                            </div>
+                        
+                    </div>
+                </div>
+                <h2>
+                    <p style="text-align: center;">Coding Plateform</p>
+                </h2>
+                <div class="contentbox">
+                    <div class="cardbox">
+                        
+                            HackerRank:
+                            <div class="form-group">
+                                <input type="text" class="form-input" name="hack" id="name" placeholder="HackerRank" value="{{emp.hack}}"
+                                    />
+                            </div>
+                        
+    
+                    </div>
+                    <div class="cardbox">
+                        Codechef:
+                            <div class="form-group">
+                                <input type="text" class="form-input" name="codechef" id="name" placeholder="Codechef" value="{{emp.codechef}}"
+                                    />
+                            </div>
+    
+                    </div>
+                    <div class="cardbox">
+                        Leetcode:
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="leet" id="name" placeholder="Leetcode" value="{{emp.leet}}"
+                                />
+                        </div>
+                    </div>
+                    <div class="cardbox">
+                        GitHub:
+                            <div class="form-group">
+                                <input type="text" class="form-input" name="gthub" id="name" placeholder="GitHub" value="{{emp.gthub}}"
+                                    />
+                            </div>
+                    </div>
+                    <div class="cardbox">
+                        
+                            GeeksForGeeks:
+                            <div class="form-group">
+                                <input type="text" class="form-input" name="gfg" id="name" placeholder="GeeksForGeeks" value="{{emp.gfg}}"
+                                    />
+                            </div>
+                        
+                    </div>
+                </div>
+                <div class="contentbox">
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+        </div>
+        {% endfor %}
+    </form>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
